@@ -4,10 +4,9 @@ RUN npm i -g pnpm
 
 FROM base AS dependencies
 WORKDIR /app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY packages ./packages
-COPY site ./site
+COPY pnpm-lock.yaml ./
 RUN pnpm fetch
+COPY . .
 RUN pnpm install -r --offline
 
 FROM base AS build

@@ -6,12 +6,11 @@ RUN npm i -g pnpm
 
 FROM base AS dependencies
 WORKDIR /app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY packages ./packages
-COPY site ./site
+COPY pnpm-lock.yaml ./
 RUN mkdir -p /root/.local/share/pnpm
 RUN --mount=type=cache,target=/pnpm-cache if [ -n "$(ls -A /pnpm-cache 2>/dev/null)" ] ; then cp -a /pnpm-cache/* /root/.local/share/pnpm/ ; fi
 RUN pnpm fetch
+COPY . .
 RUN pnpm install -r --offline
 RUN --mount=type=cache,target=/pnpm-cache cp -a /root/.local/share/pnpm/* /pnpm-cache/
 

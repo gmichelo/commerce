@@ -2,7 +2,7 @@
 
 FROM node:lts-alpine AS base
 RUN apk add libc6-compat gcompat coreutils
-RUN npm i -g pnpm
+RUN npm i -g pnpm@7.29.1
 
 FROM base AS dependencies
 WORKDIR /app
@@ -33,4 +33,4 @@ COPY --from=build /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=build /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
 
 EXPOSE 3000
-ENTRYPOINT ["pnpm", "dev"]
+ENTRYPOINT ["pnpm", "start"]

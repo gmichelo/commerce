@@ -6,6 +6,17 @@ permissions:
   contents: read
   
 jobs:
+  build_with_arc:
+    runs-on: arc-runner-set
+    name: Build with ARC runners
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build and push
+        uses: docker/build-push-action@v4
+  
   build_with_self_hosted:
     runs-on: my-permanent-runner
     name: Build with self-hosted runner

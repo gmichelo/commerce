@@ -6,9 +6,9 @@ permissions:
   contents: read
   
 jobs:
-  build_with_docker:
+  build_with_self_hosted:
     runs-on: my-permanent-runner
-    name: Build with Docker
+    name: Build with self-hosted runner
     steps:
       - name: Checkout
         uses: actions/checkout@v3
